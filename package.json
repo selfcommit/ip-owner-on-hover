@@ -1,0 +1,13 @@
+{
+  "name": "ip-owner-on-hover",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Chrome extension: hover any IPv4/IPv6 address on a page to see who owns it (IPinfo).",
+  "scripts": {
+    "test": "node test/detect.test.js && node test/content.test.js",
+    "package": "zip -r ip-owner-on-hover.zip manifest.json *.js *.css options.html -x 'test/*'"
+  },
+  "devDependencies": {
+    "jsdom": "^25.0.0"
+  }
+}

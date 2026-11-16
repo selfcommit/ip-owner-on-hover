@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>IP Owner on Hover: manual test page</title>
+<style>
+  body { font: 15px/1.6 system-ui, sans-serif; max-width: 720px; margin: 32px auto; padding: 0 16px; }
+  h2 { font-size: 16px; margin-top: 28px; }
+  code { background: #8882; padding: 1px 4px; border-radius: 3px; }
+</style>
+</head>
+<body>
+<h1>IP Owner on Hover: manual test page</h1>
+<p>Open this file in Chrome with the extension loaded. Expected results are in brackets.</p>
+
+<h2>1. Public IPv4 (should be underlined; hover shows an owner)</h2>
+<p>Cloudflare: 104.22.160.44 [Cloudflare, Inc. · AS13335]</p>
+<p>Google DNS: 8.8.8.8 [Google LLC · AS15169]</p>
+<p>Quad9: 9.9.9.9 [Quad9 / WoodyNet]</p>
+
+<h2>2. Public IPv6 (underlined; hover shows an owner)</h2>
+<p>Cloudflare DNS: 2606:4700:4700::1111 [Cloudflare, Inc.]</p>
+<p>Google DNS: 2001:4860:4860::8888 [Google LLC]</p>
+<p>IPv4-mapped: ::ffff:8.8.4.4 [looks up 8.8.4.4 → Google LLC]</p>
+
+<h2>3. Reserved ranges (underlined; labelled locally, no network request)</h2>
+<p>192.168.1.1 [Private network] · 10.0.0.1 [Private network] · 127.0.0.1 [Loopback] · fe80::1 [Link-local]</p>
+
+<h2>4. Should NOT be underlined</h2>
+<p>Times and MACs: 12:34:56 · aa:bb:cc:dd:ee:ff · Invalid: 256.1.1.1 · 1.2.3.4.5</p>
+<textarea rows="2" cols="40">8.8.8.8 inside a textarea</textarea>
+<div contenteditable="true" style="border:1px dashed #888;padding:4px">1.1.1.1 inside an editable div</div>
+
+<h2>5. Content added after load (should be underlined about 0.3 s after clicking)</h2>
+<button id="add">Add an IP to the page</button>
+<p id="late"></p>
+<script>
+  document.getElementById('add').addEventListener('click', () => {
+    document.getElementById('late').textContent = 'Added later: 1.0.0.1 [Cloudflare]';
+  });
+</script>
+
+<h2>Known false positive</h2>
+<p>Version 1.2.3.4 [gets underlined: a 4-part version string looks like an IP]</p>
+</body>
+</html>

@@ -1,0 +1,19 @@
+{
+  "manifest_version": 3,
+  "name": "IP Owner on Hover",
+  "version": "0.1.0",
+  "description": "Hover any IPv4 or IPv6 address on a page to see who owns it, using IPinfo.",
+  "permissions": ["storage", "alarms"],
+  "host_permissions": ["https://api.ipinfo.io/*", "https://ipinfo.io/*"],
+  "background": { "service_worker": "background.js" },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["ip-detect.js", "content.js"],
+      "css": ["content.css"],
+      "run_at": "document_idle",
+      "all_frames": true
+    }
+  ],
+  "options_ui": { "page": "options.html", "open_in_tab": false }
+}

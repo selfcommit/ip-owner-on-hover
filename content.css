@@ -1,0 +1,5 @@
+ipco-ip {
+  text-decoration: underline dotted currentColor 1px;
+  text-underline-offset: 2px;
+  cursor: help;
+}
